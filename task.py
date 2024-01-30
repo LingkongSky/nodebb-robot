@@ -2,13 +2,25 @@ import asyncio
 import requests
 
 
-async def tasks():
+async def tasks(array):
     # 这里是你要执行的任务代码
-    print("Running tasks...")
-    await asyncio.sleep(1)  # 模拟任务执行时间
+    api_url = array['api_url']
+    bearer_token = array['bearer_token']
+    uid = array['uid']
+    cid = array['cid']
+    title = array['title']
+    content_type = array['content_type']
+    content = array['content']
 
+    # await asyncio.sleep(1)  # 模拟任务执行时间
 
-# create(api_url, bearer_token, uid, cid, title, content)
+    if content_type == "string":
+        print("Running tasks...")
+        create(api_url, bearer_token, uid, cid, title, content)
+    elif content_type == "url":
+        result = requests.get(content)
+        content = result.text
+        create(api_url, bearer_token, uid, cid, title, content)
 
 
 def create(url, token, uid, cid, title, content):

@@ -1,23 +1,17 @@
 import asyncio
-import time, datetime
+import datetime
 
 from task import tasks
 
 
 async def inputs(array):
-    api_url = array['api_url']
-    bearer_token = array['bearer_token']
-    uid = array['uid']
-    cid = array['cid']
-    title = array['title']
-    content_type = array['content_type']
-    content = array['content']
+
     time_type = array['time_type']
     times = array['time']
 
     if time_type == 'routine':
         while True:
-            await tasks()
+            await tasks(array)
             await asyncio.sleep(int(times))  #
 
     elif time_type == 'everyday':
@@ -26,7 +20,7 @@ async def inputs(array):
         wait_time = calculate_wait_time(times, current_time, 'everyday')
         await asyncio.sleep(wait_time)
         while True:
-            await tasks()
+            await tasks(array)
             await asyncio.sleep(86440)  # 每隔一天执行一次
 
     elif time_type == 'everymonth':
@@ -35,14 +29,14 @@ async def inputs(array):
         wait_time = calculate_wait_time(times, current_date, 'everymonth')
         await asyncio.sleep(wait_time)
         while True:
-            await tasks()
+            await tasks(array)
             await asyncio.sleep(2591920)  # 每隔一个月执行一次
     elif time_type == 'once':
         # 获取当前时间 计算目标时间差 睡眠 然后对比执行
         current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
         wait_time = calculate_wait_time(times, current_date, 'once')
         await asyncio.sleep(wait_time)
-        await tasks()
+        await tasks(array)
 
 
 def calculate_wait_time(times, current_time, time_type):
