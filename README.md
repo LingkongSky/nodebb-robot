@@ -1,6 +1,8 @@
-# nodebb-robot
+# English
+## nodebb-robot
 A topic robot use for nodebb.
 **It still in develop!!!**
+
 ## Useage
 - pip install requirements.txt
 - vim config.yaml
@@ -23,6 +25,8 @@ robots:
 ````
 
 ***
+# 简体中文
+## nodebb-robot
 一个用于Nodebb的论坛机器人
 **仍处于开发阶段!!!**
 
@@ -31,7 +35,7 @@ robots:
 - vim config.yaml
 - python main.py &
 
-## Config
+## 配置文件
 ````
 robots:
    -
