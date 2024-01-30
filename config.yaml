@@ -6,6 +6,7 @@ robots:
       cid : 2
       title : "test"
       content_type: "url" #["url","string"]
+      request_type: "get" # ['get','post']
       content : "http://118.31.18.68:8080/news/api/news-file/get"
       time_type: "routine" #['routine','everyday',''everymonth'','once']
       time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
@@ -13,8 +14,10 @@ robots:
    #   api_url : "https://www.example.com/api/v3/topics"
    #   bearer_token : "26370927-9d0f-44ae-b343-dd365464575d"
    #   uid : 173
-   #   cid : 3
+   #   cid : 2
    #   title : "test"
-   #   content_type: "string" #["url","string"]
-   #   content : "aaaaa"
-   #   time_type: "" #['routine','everyday','once']
+   #   content_type: "url" #["url","string"]
+   #  request_type: "get" # ['get','post']
+   #   content : "http://118.31.18.68:8080/news/api/news-file/get"
+   #   time_type: "routine" #['routine','everyday',''everymonth'','once']
+   #   time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00

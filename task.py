@@ -10,6 +10,7 @@ async def tasks(array):
     cid = array['cid']
     title = array['title']
     content_type = array['content_type']
+    request_type = array['request_type']
     content = array['content']
 
     # await asyncio.sleep(1)  # 模拟任务执行时间
@@ -18,7 +19,10 @@ async def tasks(array):
         print("Running tasks...")
         create(api_url, bearer_token, uid, cid, title, content)
     elif content_type == "url":
-        result = requests.get(content)
+        if request_type == 'get':
+            result = requests.get(content)
+        else:
+            result = requests.post(content)
         content = result.text
         create(api_url, bearer_token, uid, cid, title, content)
 

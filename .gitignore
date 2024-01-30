@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+config.yaml
 build/
 develop-eggs/
 dist/
