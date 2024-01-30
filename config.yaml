@@ -1,6 +1,6 @@
 robots:
    -
-      api_url : "https://www.jxau-forum.com/api/v3/topics"
+      api_url : "https://www.example.com/api/v3/topics"
       bearer_token : "26370927-9d0f-44ae-b343-dd365464575d"
       uid : 173
       cid : 2
@@ -10,7 +10,7 @@ robots:
       time_type: "routine" #['routine','everyday',''everymonth'','once']
       time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
    #-
-   #   api_url : "https://www.jxau-forum.com/api/v3/topics"
+   #   api_url : "https://www.example.com/api/v3/topics"
    #   bearer_token : "26370927-9d0f-44ae-b343-dd365464575d"
    #   uid : 173
    #   cid : 3
