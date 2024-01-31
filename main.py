@@ -1,7 +1,6 @@
 import asyncio
 import os
 import signal
-
 import yaml
 from decode import inputs
 import sys
@@ -117,7 +116,6 @@ def helps():
         stop -n, --name         stop the process by the input name
         -l, --list              list the process
         -h, --help              print the usage
-
     ''')
 
 

@@ -1,12 +1,25 @@
 # English
 ## nodebb-robot
-A topic robot use for nodebb.
-**It still in develop!!!**
-
+A topic robot use for nodebb，which can post data by string or url.Support the regular and multitasks.
+## Build
+````
+pip install requirements.txt
+pyinstaller ./main.py --onefile
+````
 ## Usage
-- pip install requirements.txt
-- vim config.yaml
-- python main.py &
+````
+vim config.yaml
+chmod +x nodebb-robot
+./nodebb-robot [options]
+````
+````
+        start                   start the process by default
+        stop                    stop the process by default
+        start -n, --name        start the process by the input name
+        stop -n, --name         stop the process by the input name
+        -l, --list              list the process
+        -h, --help              print the usage
+````
 
 ## Config
 ````
@@ -27,14 +40,26 @@ robots:
 ***
 # 简体中文
 ## nodebb-robot
-一个用于Nodebb的论坛机器人
-**仍处于开发阶段!!!**
-
+一个用于Nodebb的论坛机器人，可通过字符串或者链接来指定帖子内容。支持定时和多任务模式。
+## 构建
+````
+pip install requirements.txt
+pyinstaller ./main.py --onefile
+````
 ## 使用方法
-- pip install requirements.txt
-- vim config.yaml
-- python main.py &
-
+````
+pip install requirements.txt
+vim config.yaml
+python main.py &
+````
+````
+        start                   以默认名称运行程序
+        stop                    终止默认名称的程序
+        start -n, --name        以自定义名称运行程序
+        stop -n, --name         终止自定义名称的程序
+        -l, --list              列出所有在运行的程序
+        -h, --help              打印使用方法
+````
 ## 配置文件
 ````
 robots:
