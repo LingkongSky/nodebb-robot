@@ -1,42 +1,52 @@
 import asyncio
 import datetime
+import os
+import sys
 
 from task import tasks
 
 
-async def inputs(array):
-
+async def inputs(array, name):
     time_type = array['time_type']
     times = array['time']
 
-    if time_type == 'routine':
-        while True:
+    try:
+        if time_type == 'routine':
+            write_process(name)
+            while True:
+                await tasks(array)
+                await asyncio.sleep(int(times))
+
+        elif time_type == 'everyday':
+            write_process(name)
+            current_time = datetime.datetime.now().strftime("%H:%M")
+            wait_time = calculate_wait_time(times, current_time, 'everyday')
+            await asyncio.sleep(wait_time)
+            while True:
+                await tasks(array)
+                await asyncio.sleep(86440)  # 每隔一天执行一次
+
+        elif time_type == 'everymonth':
+            write_process(name)
+            current_date = datetime.datetime.now().strftime("%d-%H:%M")
+            wait_time = calculate_wait_time(times, current_date, 'everymonth')
+            await asyncio.sleep(wait_time)
+            while True:
+                await tasks(array)
+                await asyncio.sleep(2591920)  # 每隔一个月执行一次
+        elif time_type == 'once':
+            write_process(name)
+            # 获取当前时间 计算目标时间差 睡眠 然后对比执行
+            current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
+            wait_time = calculate_wait_time(times, current_date, 'once')
+            await asyncio.sleep(wait_time)
             await tasks(array)
-            await asyncio.sleep(int(times))  #
-
-    elif time_type == 'everyday':
-
-        current_time = datetime.datetime.now().strftime("%H:%M")
-        wait_time = calculate_wait_time(times, current_time, 'everyday')
-        await asyncio.sleep(wait_time)
-        while True:
-            await tasks(array)
-            await asyncio.sleep(86440)  # 每隔一天执行一次
-
-    elif time_type == 'everymonth':
-
-        current_date = datetime.datetime.now().strftime("%d-%H:%M")
-        wait_time = calculate_wait_time(times, current_date, 'everymonth')
-        await asyncio.sleep(wait_time)
-        while True:
-            await tasks(array)
-            await asyncio.sleep(2591920)  # 每隔一个月执行一次
-    elif time_type == 'once':
-        # 获取当前时间 计算目标时间差 睡眠 然后对比执行
-        current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
-        wait_time = calculate_wait_time(times, current_date, 'once')
-        await asyncio.sleep(wait_time)
-        await tasks(array)
+            from main import stop
+            stop()
+        else:
+            print("illegal error:invalid time_type: " + time_type)
+    except SystemError:
+        over()
 
 
 def calculate_wait_time(times, current_time, time_type):
@@ -67,16 +77,27 @@ def calculate_wait_time(times, current_time, time_type):
         target_date = times
         target_date_parts = target_date.split('-')
         target_date_parts1 = target_date_parts[2].split(':')
-        time1 = target_date_parts[0] * 2592000 + target_date_parts[1] * 86400 + target_date_parts1[0] * 3600 + \
-                target_date_parts1[1] * 60
+        time1 = int(target_date_parts[0]) * 2592000 + int(target_date_parts[1]) * 86400 + int(
+            target_date_parts1[0]) * 3600 + int(target_date_parts1[1]) * 60
 
         current_date_parts = current_time.split('-')
         current_date_parts1 = current_date_parts[2].split(':')
-        time2 = current_date_parts[0] * 2592000 + current_date_parts[1] * 86400 + current_date_parts1[0] * 3600 + \
-                current_date_parts1[1] * 60
-
-        wait_time = time1 - time2
+        time2 = int(current_date_parts[0]) * 2592000 + int(current_date_parts[1]) * 86400 + int(current_date_parts1[0]) * 3600 + \
+                int(current_date_parts1[1]) * 60
+        wait_time = int(time1) - int(time2)
         if wait_time > 0:
             return wait_time
         else:
             return wait_time + 31536000
+
+
+def write_process(name):
+    pid = os.getpid()
+    with open('./process.list', 'w', encoding='utf-8') as f:
+        f.write(name + " " + str(pid))
+    pass
+
+
+def over():
+    print("Uncaught error occurred.")
+    sys.exit()

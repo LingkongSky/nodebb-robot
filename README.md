@@ -3,7 +3,7 @@
 A topic robot use for nodebb.
 **It still in develop!!!**
 
-## Useage
+## Usage
 - pip install requirements.txt
 - vim config.yaml
 - python main.py &
