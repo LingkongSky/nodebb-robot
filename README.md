@@ -1,10 +1,11 @@
 # English
 ## nodebb-robot
 A topic robot use for nodebb，which can post data by string or url.Support the regular and multitasks.
+Environment：Python3.11
 ## Build
 ````
-pip install requirements.txt
-pyinstaller ./main.py --onefile
+pip install -r requirements.txt
+pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/site-packages
 ````
 ## Usage
 ````
@@ -41,16 +42,17 @@ robots:
 # 简体中文
 ## nodebb-robot
 一个用于Nodebb的论坛机器人，可通过字符串或者链接来指定帖子内容。支持定时和多任务模式。
+环境：Python3.11
 ## 构建
 ````
-pip install requirements.txt
-pyinstaller ./main.py --onefile
+pip install -r requirements.txt
+pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/site-packages
 ````
 ## 使用方法
 ````
-pip install requirements.txt
 vim config.yaml
-python main.py &
+chmod +x nodebb-robot
+./nodebb-robot [options]
 ````
 ````
         start                   以默认名称运行程序
