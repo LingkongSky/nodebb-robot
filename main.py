@@ -15,7 +15,7 @@ async def main():
     utils.file_scanner()
     utils.status_update()
     if len(sys.argv) < 2:
-        print("Use --help to print the usage")
+        print("Use help to print the usage")
         sys.exit()
 
     command = sys.argv[1]
@@ -28,9 +28,7 @@ async def main():
             create()
         case "list":
             lists()
-        case "-h":
-            helps()
-        case "--help":
+        case "help":
             helps()
         case _:
             print("Use --help to print the usage")
@@ -174,7 +172,7 @@ def helps():
         start <name>            start the process by the task name
         stop <name>             stop the process by the task name
         list                    list the tasks
-        -h, --help              print the usage
+        help                    print the usage
     ''')
 
 
