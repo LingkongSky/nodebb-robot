@@ -24,7 +24,7 @@ async def inputs(array, name):
             await asyncio.sleep(wait_time)
             while True:
                 await tasks(array)
-                await asyncio.sleep(86440)  # 每隔一天执行一次
+                await asyncio.sleep(86440)
 
         elif time_type == 'everymonth':
             write_process(name)
@@ -33,10 +33,9 @@ async def inputs(array, name):
             await asyncio.sleep(wait_time)
             while True:
                 await tasks(array)
-                await asyncio.sleep(2591920)  # 每隔一个月执行一次
+                await asyncio.sleep(2591920)
         elif time_type == 'once':
             write_process(name)
-            # 获取当前时间 计算目标时间差 睡眠 然后对比执行
             current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
             wait_time = calculate_wait_time(times, current_date, 'once')
             await asyncio.sleep(wait_time)
@@ -82,7 +81,8 @@ def calculate_wait_time(times, current_time, time_type):
 
         current_date_parts = current_time.split('-')
         current_date_parts1 = current_date_parts[2].split(':')
-        time2 = int(current_date_parts[0]) * 2592000 + int(current_date_parts[1]) * 86400 + int(current_date_parts1[0]) * 3600 + \
+        time2 = int(current_date_parts[0]) * 2592000 + int(current_date_parts[1]) * 86400 + int(
+            current_date_parts1[0]) * 3600 + \
                 int(current_date_parts1[1]) * 60
         wait_time = int(time1) - int(time2)
         if wait_time > 0:
@@ -93,9 +93,8 @@ def calculate_wait_time(times, current_time, time_type):
 
 def write_process(name):
     pid = os.getpid()
-    with open('./process.list', 'w', encoding='utf-8') as f:
-        f.write(name + " " + str(pid))
-    pass
+    with open('tasks/' + name + '/process.pid', 'w', encoding='utf-8') as f:
+        f.write(str(pid))
 
 
 def over():

@@ -2,7 +2,6 @@ import requests
 
 
 async def tasks(array):
-    # 这里是你要执行的任务代码
     api_url = array['api_url']
     bearer_token = array['bearer_token']
     uid = array['uid']
@@ -12,7 +11,6 @@ async def tasks(array):
     request_type = array['request_type']
     content = array['content']
 
-    # await asyncio.sleep(1)  # 模拟任务执行时间
 
     if content_type == "string":
         print("Running tasks...")

@@ -1,15 +1,19 @@
 import asyncio
 import os
+import shutil
 import signal
+import subprocess
+
+import psutil
 import yaml
-from decode import inputs
 import sys
+import utils
+from decode import inputs
 
 
 async def main():
-
-    file_scanner()
-
+    utils.file_scanner()
+    utils.status_update()
     if len(sys.argv) < 2:
         print("Use --help to print the usage")
         sys.exit()
@@ -22,9 +26,7 @@ async def main():
             stop()
         case "create":
             create()
-        case "-l":
-            lists()
-        case "--list":
+        case "list":
             lists()
         case "-h":
             helps()
@@ -46,8 +48,27 @@ async def start():
     else:
         name = "default"
 
+    # check the status
+    status = ''
     try:
-        with open('./config.yaml', 'r', encoding='utf-8') as f:
+        with open("tasks.list") as f:
+            lines = f.readlines()
+        for line in lines:
+            parts = line.strip().split(" ")
+            if len(parts) == 2:
+                if parts[0] == name:
+                    status = parts[1]
+                    break
+
+    except FileNotFoundError:
+        print(f"Task was not found")
+
+    if status == "Enable":
+        print(f"Task is running...")
+        return
+
+    try:
+        with open('tasks/' + name + '/config.yaml', 'r', encoding='utf-8') as f:
             result = yaml.load(f.read(), Loader=yaml.FullLoader)
             for i in result['robots']:
                 await inputs(i, name)
@@ -67,47 +88,81 @@ def stop():
     else:
         name = "default"
 
-    file_path = 'process.list'
-    target_pid = None
-
+    # check the status
+    status = ''
     try:
-        # 找到匹配的行并保存第二部分
-        with open(file_path, 'r') as file:
-            for line in file:
-                parts = line.split()
-                if len(parts) > 0 and parts[0] == name:
-                    target_pid = parts[1]
+        with open("tasks.list") as f:
+            lines = f.readlines()
+        for line in lines:
+            parts = line.strip().split(" ")
+            if len(parts) == 2:
+                if parts[0] == name:
+                    status = parts[1]
                     break
 
-        # 从文件中删除匹配的行
-        with open(file_path, 'r') as file:
-            lines = file.readlines()
+    except FileNotFoundError:
+        print(f"Task was not found")
 
-        with open(file_path, 'w') as file:
-            for line in lines:
-                parts = line.split()
-                if len(parts) > 0 and parts[0] != name:
-                    file.write(line)
+    if status == "Disable":
+        print(f"Task is already stopped...")
+        return
 
-        # 打印匹配行的第二部分
-        if target_pid:
-            print("close the " + str(target_pid))
-            os.kill(int(target_pid), signal.SIGTERM)
-        else:
-            print("cannot found the process by the name")
-    except OSError:
-        print(OSError)
+    process_file_path = "tasks/" + name + "/process.pid"
+
+    if os.path.exists(process_file_path):
+        with open(process_file_path, "r") as process_file:
+            pid = process_file.read().strip()
+            if pid:
+                try:
+                    os.kill(int(pid), signal.SIGTERM)
+                except (psutil.NoSuchProcess, ValueError):
+                    print("Not found such process")
+
 
 def create():
-    pass
+    arrays = ["", "", ""]
+    i = 0
+    for arg in sys.argv:
+        arrays[i] = arg
+        i = i + 1
+
+    if arrays[2] != "":
+        name = arrays[2]
+    else:
+        name = "default"
+
+    if not os.path.exists("tasks"):
+        os.makedirs("tasks")
+
+    if not os.path.exists("tasks/" + name):
+        os.makedirs("tasks/" + name)
+
+    current_dir = os.getcwd()
+    config_file_path = os.path.join(current_dir, "config.yaml")
+    if os.path.exists(config_file_path):
+        shutil.copy(config_file_path, "tasks/" + name)
+    else:
+        print("config.yaml isn't exist")
+
 
 def lists():
-    with open('process.list', 'r') as file:
-        for line in file:
-            parts = line.split()
-            if len(parts) > 0:
-                first_part = parts[0]
-                print(first_part)
+    with open("tasks.list", "r") as f:
+        lines = f.readlines()
+
+        # 遍历每一行并处理
+    for line in lines:
+        parts = line.strip().split(" ")
+        if len(parts) == 2:
+            folder_name, status = parts
+            if status == "Enable":
+                # Use the ANSI encode
+                print(f"{folder_name} \033[92m{status}\033[0m")
+            elif status == "Disable":
+                print(f"{folder_name} \033[91m{status}\033[0m")
+            else:
+                print(line.strip())
+        else:
+            print(line.strip())
 
 
 def helps():
@@ -115,48 +170,16 @@ def helps():
     Welcome to use this tool to create a robot for nodebb.
     It produce by LingkongSky@gmail.com.
     Usage:
-        start                   start the process by default
-        stop                    stop the process by default
-        start <name>       start the process by the input name
-        stop <name>         stop the process by the input name
-        -l, --list              list the process
+        create <name>           create a new task 
+        start <name>            start the process by the task name
+        stop <name>             stop the process by the task name
+        list                    list the tasks
         -h, --help              print the usage
     ''')
 
-
-def file_scanner():
-    if not os.path.exists('./config.yaml'):
-        # 创建并写入文件
-        with open('./config.yaml', 'w') as file:
-            file.write('''robots:
-              -
-                api_url: "https://www.example.com/api/v3/topics"
-                bearer_token: "26370927-9d0f-44ae-b343-dd365464575d"
-                uid: 173
-                cid: 2
-                title: "test"
-                content_type: "url" #["url","string"]
-                request_type: "get" # ['get','post']
-                content: "http://118.31.18.68:8080/news/api/news-file/get"
-                time_type: "routine" #['routine','everyday',''everymonth'','once']
-                time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400 23:00 07-20:00 12-07-20:00
-            # -
-            #   api_url: "https://www.example.com/api/v3/topics"
-            #   bearer_token: "26370927-9d0f-44ae-b343-dd365464575d"
-            #   uid: 173
-            #   cid: 2
-            #   title: "test"
-            #   content_type: "url" #["url","string"]
-            #   request_type: "get" # ['get','post']
-            #   content: "http://118.31.18.68:8080/news/api/news-file/get"
-            #   time_type: "routine" #['routine','everyday',''everymonth'','once']
-            #   time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400 23:00 07-20:00 12-07-20:00
-            ''')
-    if not os.path.exists('./process.list'):
-        # 创建并写入文件
-        open('./process.list', 'w')
 
 
 loop = asyncio.get_event_loop()
 task = loop.create_task(main())
 loop.run_until_complete(task)
+

@@ -14,11 +14,10 @@ chmod +x nodebb-robot
 ./nodebb-robot [options]
 ````
 ````
-        start                   start the process by default
-        stop                    stop the process by default
-        start <name>            start the process by the input name
-        stop <name>             stop the process by the input name
-        -l, --list              list the process
+        create <name>           create a new task 
+        start <name>            start the process by the task name
+        stop <name>             stop the process by the task name
+        list                    list the tasks
         -h, --help              print the usage
 ````
 
@@ -55,11 +54,10 @@ chmod +x nodebb-robot
 ./nodebb-robot [options]
 ````
 ````
-        start                   以默认名称运行程序
-        stop                    终止默认名称的程序
-        start <name>            start the process by the input name
-        stop <name>             stop the process by the input name
-        -l, --list              列出所有在运行的程序
+        create <name>           创建一个新任务
+        start <name>            根据任务名创建进程
+        stop <name>             根据任务名关闭进程
+        list                    列出所有任务
         -h, --help              打印使用方法
 ````
 ## 配置文件
