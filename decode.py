@@ -16,6 +16,7 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(int(times))
+                print("execute successful: " + str(datetime.datetime.now()))
 
         elif time_type == 'everyday':
             write_process(name)
@@ -25,6 +26,7 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(86440)
+                print("execute successful: " + str(datetime.datetime.now()))
 
         elif time_type == 'everymonth':
             write_process(name)
@@ -34,12 +36,15 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(2591920)
+                print("execute successful: " + str(datetime.datetime.now()))
+
         elif time_type == 'once':
             write_process(name)
             current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
             wait_time = calculate_wait_time(times, current_date, 'once')
             await asyncio.sleep(wait_time)
             await tasks(array)
+            print("execute successful: " + str(datetime.datetime.now()))
             from main import stop
             stop()
         else:

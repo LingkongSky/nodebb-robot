@@ -11,7 +11,8 @@ pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/s
 ````
 vim config.yaml
 chmod +x nodebb-robot
-./nodebb-robot [options]
+./nodebb-robot create <name>
+./nodebb-robot start <name>
 ````
 ````
         create <name>           create a new task 
@@ -51,7 +52,8 @@ pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/s
 ````
 vim config.yaml
 chmod +x nodebb-robot
-./nodebb-robot [options]
+./nodebb-robot create <name>
+./nodebb-robot start <name>
 ````
 ````
         create <name>           创建一个新任务
