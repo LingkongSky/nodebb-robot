@@ -7,6 +7,7 @@ import sys
 
 
 async def main():
+
     file_scanner()
 
     if len(sys.argv) < 2:
@@ -19,6 +20,8 @@ async def main():
             await start()
         case "stop":
             stop()
+        case "create":
+            create()
         case "-l":
             lists()
         case "--list":
@@ -32,14 +35,14 @@ async def main():
 
 
 async def start():
-    arrays = ["", "", "", ""]
+    arrays = ["", "", ""]
     i = 0
     for arg in sys.argv:
         arrays[i] = arg
         i = i + 1
 
-    if (arrays[2] == "-n" or arrays[2] == '--name') and arrays[3] != "":
-        name = arrays[3]
+    if arrays[2] != "":
+        name = arrays[2]
     else:
         name = "default"
 
@@ -53,14 +56,14 @@ async def start():
 
 
 def stop():
-    arrays = ["", "", "", ""]
+    arrays = ["", "", ""]
     i = 0
     for arg in sys.argv:
         arrays[i] = arg
         i = i + 1
 
-    if (arrays[2] == "-n" or arrays[2] == '--name') and arrays[3] != "":
-        name = arrays[3]
+    if arrays[2] != "":
+        name = arrays[2]
     else:
         name = "default"
 
@@ -95,6 +98,8 @@ def stop():
     except OSError:
         print(OSError)
 
+def create():
+    pass
 
 def lists():
     with open('process.list', 'r') as file:
@@ -112,8 +117,8 @@ def helps():
     Usage:
         start                   start the process by default
         stop                    stop the process by default
-        start -n, --name        start the process by the input name
-        stop -n, --name         stop the process by the input name
+        start <name>       start the process by the input name
+        stop <name>         stop the process by the input name
         -l, --list              list the process
         -h, --help              print the usage
     ''')

@@ -16,8 +16,8 @@ chmod +x nodebb-robot
 ````
         start                   start the process by default
         stop                    stop the process by default
-        start -n, --name        start the process by the input name
-        stop -n, --name         stop the process by the input name
+        start <name>            start the process by the input name
+        stop <name>             stop the process by the input name
         -l, --list              list the process
         -h, --help              print the usage
 ````
@@ -57,8 +57,8 @@ chmod +x nodebb-robot
 ````
         start                   以默认名称运行程序
         stop                    终止默认名称的程序
-        start -n, --name        以自定义名称运行程序
-        stop -n, --name         终止自定义名称的程序
+        start <name>            start the process by the input name
+        stop <name>             stop the process by the input name
         -l, --list              列出所有在运行的程序
         -h, --help              打印使用方法
 ````
