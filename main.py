@@ -2,8 +2,6 @@ import asyncio
 import os
 import shutil
 import signal
-import subprocess
-
 import psutil
 import yaml
 import sys
@@ -176,8 +174,14 @@ def helps():
     ''')
 
 
+if sys.version_info < (3, 10):
+    loop = asyncio.get_event_loop()
+else:
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
 
-loop = asyncio.get_event_loop()
+asyncio.set_event_loop(loop)
 task = loop.create_task(main())
 loop.run_until_complete(task)
-
