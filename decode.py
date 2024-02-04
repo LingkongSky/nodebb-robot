@@ -1,8 +1,8 @@
 import asyncio
 import datetime
-import os
-import sys
-
+from utils import over
+from utils import write_process
+from utils import write_log
 from task import tasks
 
 
@@ -16,7 +16,9 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(int(times))
-                print("execute successful: " + str(datetime.datetime.now()))
+                log = "execute successful: " + str(datetime.datetime.now())
+                print(log)
+                write_log(name, log)
 
         elif time_type == 'everyday':
             write_process(name)
@@ -26,7 +28,9 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(86440)
-                print("execute successful: " + str(datetime.datetime.now()))
+                log = "execute successful: " + str(datetime.datetime.now())
+                print(log)
+                write_log(name, log)
 
         elif time_type == 'everymonth':
             write_process(name)
@@ -36,7 +40,9 @@ async def inputs(array, name):
             while True:
                 await tasks(array)
                 await asyncio.sleep(2591920)
-                print("execute successful: " + str(datetime.datetime.now()))
+                log = "execute successful: " + str(datetime.datetime.now())
+                print(log)
+                write_log(name, log)
 
         elif time_type == 'once':
             write_process(name)
@@ -44,11 +50,15 @@ async def inputs(array, name):
             wait_time = calculate_wait_time(times, current_date, 'once')
             await asyncio.sleep(wait_time)
             await tasks(array)
-            print("execute successful: " + str(datetime.datetime.now()))
+            log = "execute successful: " + str(datetime.datetime.now())
+            print(log)
+            write_log(name, log)
             from main import stop
             stop()
         else:
-            print("illegal error:invalid time_type: " + time_type)
+            log = "illegal error:invalid time_type: " + time_type
+            print(log)
+            write_log(name, log)
     except SystemError:
         over()
 
@@ -94,14 +104,3 @@ def calculate_wait_time(times, current_time, time_type):
             return wait_time
         else:
             return wait_time + 31536000
-
-
-def write_process(name):
-    pid = os.getpid()
-    with open('tasks/' + name + '/process.pid', 'w', encoding='utf-8') as f:
-        f.write(str(pid))
-
-
-def over():
-    print("Uncaught error occurred.")
-    sys.exit()

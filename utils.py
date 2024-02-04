@@ -1,4 +1,5 @@
 import os
+import sys
 import psutil
 
 
@@ -66,3 +67,17 @@ def status_update():
                     f.write(f"{folder_name} Disable\n")
 
 
+def write_process(name):
+    pid = os.getpid()
+    with open('tasks/' + name + '/process.pid', 'w', encoding='utf-8') as f:
+        f.write(str(pid))
+
+
+def write_log(name, content):
+    with open('tasks/' + name + '/logs.txt', 'a', encoding='utf-8') as f:
+        f.write(content + "\n")
+
+
+def over():
+    print("Uncaught error occurred.")
+    sys.exit()
