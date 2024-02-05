@@ -75,7 +75,7 @@ def write_process(name):
 
 def write_log(name, content):
     with open('tasks/' + name + '/logs.txt', 'a', encoding='utf-8') as f:
-        f.write(content + "\n")
+        f.write("\n" + content)
 
 
 def over():

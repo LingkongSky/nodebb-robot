@@ -28,6 +28,8 @@ async def main():
             lists()
         case "help":
             helps()
+        case "log":
+            logs()
         case _:
             print("Use --help to print the usage")
 
@@ -161,6 +163,25 @@ def lists():
             print(line.strip())
 
 
+def logs():
+    arrays = ["", "", ""]
+    i = 0
+    for arg in sys.argv:
+        arrays[i] = arg
+        i = i + 1
+
+    if arrays[2] != "":
+        name = arrays[2]
+    else:
+        name = "default"
+    try:
+        with open('tasks/' + name + '/logs.txt', 'r', encoding='utf-8') as f:
+            print(str(f.read()))
+    except OSError:
+        print(OSError)
+    # print the log and add log output
+
+
 def helps():
     print('''
     Welcome to use this tool to create a robot for nodebb.
@@ -170,6 +191,7 @@ def helps():
         start <name>            start the process by the task name
         stop <name>             stop the process by the task name
         list                    list the tasks
+        logs <name>             print the task log
         help                    print the usage
     ''')
 

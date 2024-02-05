@@ -19,6 +19,7 @@ chmod +x nodebb-robot
         start <name>            start the process by the task name
         stop <name>             stop the process by the task name
         list                    list the tasks
+        log <name>              print the task log
         help                    print the usage
 ````
 
@@ -60,6 +61,7 @@ chmod +x nodebb-robot
         start <name>            根据任务名创建进程
         stop <name>             根据任务名关闭进程
         list                    列出所有任务
+        log <name>              打印任务日志
         help                    打印使用方法
 ````
 ## 配置文件
