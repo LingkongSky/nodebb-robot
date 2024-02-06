@@ -9,9 +9,21 @@ import utils
 from decode import inputs
 
 
+arrays = ["", "", ""]
+i = 0
+for arg in sys.argv:
+    arrays[i] = arg
+    i = i + 1
+
+if arrays[2] != "":
+    name = arrays[2]
+else:
+    name = "default"
+
+
 async def main():
-    utils.file_scanner()
-    utils.status_update()
+    utils.file_scanner()  # create the necessary files
+    utils.status_update()  # update the tasks.list
     if len(sys.argv) < 2:
         print("Use help to print the usage")
         sys.exit()
@@ -35,17 +47,6 @@ async def main():
 
 
 async def start():
-    arrays = ["", "", ""]
-    i = 0
-    for arg in sys.argv:
-        arrays[i] = arg
-        i = i + 1
-
-    if arrays[2] != "":
-        name = arrays[2]
-    else:
-        name = "default"
-
     # check the status
     status = ''
     try:
@@ -75,17 +76,6 @@ async def start():
 
 
 def stop():
-    arrays = ["", "", ""]
-    i = 0
-    for arg in sys.argv:
-        arrays[i] = arg
-        i = i + 1
-
-    if arrays[2] != "":
-        name = arrays[2]
-    else:
-        name = "default"
-
     # check the status
     status = ''
     try:
@@ -118,17 +108,6 @@ def stop():
 
 
 def create():
-    arrays = ["", "", ""]
-    i = 0
-    for arg in sys.argv:
-        arrays[i] = arg
-        i = i + 1
-
-    if arrays[2] != "":
-        name = arrays[2]
-    else:
-        name = "default"
-
     if not os.path.exists("tasks"):
         os.makedirs("tasks")
 
@@ -147,7 +126,6 @@ def lists():
     with open("tasks.list", "r") as f:
         lines = f.readlines()
 
-        # 遍历每一行并处理
     for line in lines:
         parts = line.strip().split(" ")
         if len(parts) == 2:
@@ -164,16 +142,6 @@ def lists():
 
 
 def logs():
-    arrays = ["", "", ""]
-    i = 0
-    for arg in sys.argv:
-        arrays[i] = arg
-        i = i + 1
-
-    if arrays[2] != "":
-        name = arrays[2]
-    else:
-        name = "default"
     try:
         with open('tasks/' + name + '/logs.txt', 'r', encoding='utf-8') as f:
             print(str(f.read()))

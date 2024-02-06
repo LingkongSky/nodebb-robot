@@ -62,7 +62,6 @@ def status_update():
                         else:
                             f.write(f"{folder_name} Disable\n")
                 else:
-                    # 创建空的process文件
                     open(process_file_path, "w").close()
                     f.write(f"{folder_name} Disable\n")
 

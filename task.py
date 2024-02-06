@@ -11,7 +11,6 @@ async def tasks(array):
     request_type = array['request_type']
     content = array['content']
 
-
     if content_type == "string":
         print("Running tasks...")
         create(api_url, bearer_token, uid, cid, title, content)

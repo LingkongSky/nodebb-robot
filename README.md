@@ -29,12 +29,12 @@ robots:
    -
       api_url : "https://www.example.com/api/v3/topics" #your website
       bearer_token : "f65632af-8115-4ab5-b63d-9fcae6198d15"#the admin page - API user uuid
-      uid : 173 #user uuid
+      uid : 173 #user id
       cid : 2 #channel id
       title : "test" # topic title
       content_type: "url" #["url","string"]
       request_type: "get" # ['get','post'] if choose the url,the request method
-      content : "http://118.31.18.68:8080/news/api/news-file/get" #string or url callback string
+      content : "http://118.31.18.68:8080/news/api/news-file/get" #string or request callback string
       time_type: "routine" #['routine','everyday',''everymonth'','once'] #execute rule
       time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
 ````
@@ -70,7 +70,7 @@ robots:
    -
       api_url : "https://www.example.com/api/v3/topics" #你的论坛地址
       bearer_token : "f65632af-8115-4ab5-b63d-9fcae6198d15"#在管理页面-API访问中生成的用户id
-      uid : 173 #机器人用户的uid
+      uid : 173 #机器人用户的id
       cid : 2 #频道类别id
       title : "test" #帖子标题
       content_type: "url" #["url","string"] 正文类型
