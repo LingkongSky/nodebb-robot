@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+import traceback
 from utils import over
 from utils import write_process
 from utils import write_log
@@ -59,7 +60,9 @@ async def inputs(array, name):
             log = "illegal error:invalid time_type: " + time_type
             print(log)
             write_log(name, log)
-    except SystemError:
+    except SystemError as e:
+        print(e)
+        traceback.print_exc()
         over()
 
 

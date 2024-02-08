@@ -6,14 +6,15 @@ import psutil
 import yaml
 import sys
 import utils
+import traceback
 from decode import inputs
 
 
 arrays = ["", "", ""]
-i = 0
+d = 0
 for arg in sys.argv:
-    arrays[i] = arg
-    i = i + 1
+    arrays[d] = arg
+    d = d + 1
 
 if arrays[2] != "":
     name = arrays[2]
@@ -43,7 +44,7 @@ async def main():
         case "log":
             logs()
         case _:
-            print("Use --help to print the usage")
+            print("Use help to print the usage")
 
 
 async def start():
@@ -61,6 +62,7 @@ async def start():
 
     except FileNotFoundError:
         print(f"Task was not found")
+        traceback.print_exc()
 
     if status == "Enable":
         print(f"Task is running...")
@@ -71,8 +73,9 @@ async def start():
             result = yaml.load(f.read(), Loader=yaml.FullLoader)
             for i in result['robots']:
                 await inputs(i, name)
-    except IOError:
-        print(IOError)
+    except IOError as e:
+        print(e)
+        traceback.print_exc()
 
 
 def stop():
@@ -89,7 +92,8 @@ def stop():
                     break
 
     except FileNotFoundError:
-        print(f"Task was not found")
+        print(f"Task was not found:")
+        traceback.print_exc()
 
     if status == "Disable":
         print(f"Task is already stopped...")
@@ -105,6 +109,7 @@ def stop():
                     os.kill(int(pid), signal.SIGTERM)
                 except (psutil.NoSuchProcess, ValueError):
                     print("Not found such process")
+                    traceback.print_exc()
 
 
 def create():
@@ -145,8 +150,9 @@ def logs():
     try:
         with open('tasks/' + name + '/logs.txt', 'r', encoding='utf-8') as f:
             print(str(f.read()))
-    except OSError:
-        print(OSError)
+    except OSError as e:
+        print(e)
+        traceback.print_exc()
     # print the log and add log output
 
 

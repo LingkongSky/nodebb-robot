@@ -46,7 +46,7 @@ def status_update():
             if "config.yaml" in files:
                 folder_name = os.path.basename(root)
                 process_file_path = os.path.join(root, "process.pid")
-
+                result = 0
                 if os.path.exists(process_file_path):
                     with open(process_file_path, "r") as process_file:
                         pid = process_file.read().strip()
@@ -54,15 +54,14 @@ def status_update():
                             try:
                                 process = psutil.Process(int(pid))
                                 if process.is_running():
-                                    f.write(f"{folder_name} Enable\n")
-                                else:
-                                    f.write(f"{folder_name} Disable\n")
-                            except (psutil.NoSuchProcess, ValueError):
-                                f.write(f"{folder_name} Disable\n")
-                        else:
-                            f.write(f"{folder_name} Disable\n")
+                                    result = 1
+                            except (psutil.NoSuchProcess, ValueError) as e:
+                                print(e)
                 else:
                     open(process_file_path, "w").close()
+                if result == 1:
+                    f.write(f"{folder_name} Enable\n")
+                else:
                     f.write(f"{folder_name} Disable\n")
 
 
