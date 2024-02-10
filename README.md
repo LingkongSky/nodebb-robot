@@ -1,7 +1,7 @@
 # English
 ## nodebb-robot
-A topic robot use for nodebb，which can post data by string or url.Support the regular and multitasks.
-Environment：Python3.11
+A topic robot use for nodebb,which can post data by string or url.Support the regular and multitasks.
+Environment: Python3.11
 ## Build
 ````
 pip install -r requirements.txt
