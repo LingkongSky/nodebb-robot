@@ -56,7 +56,8 @@ def status_update():
                                 if process.is_running():
                                     result = 1
                             except (psutil.NoSuchProcess, ValueError) as e:
-                                print(e)
+                                #print(e)
+                                pass
                 else:
                     open(process_file_path, "w").close()
                 if result == 1:

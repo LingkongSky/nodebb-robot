@@ -10,6 +10,7 @@ import traceback
 from decode import inputs
 
 
+version = "1.2.1"
 arrays = ["", "", ""]
 d = 0
 for arg in sys.argv:
@@ -157,9 +158,10 @@ def logs():
 
 
 def helps():
-    print('''
+    print('''    Nodebb-robot Running Version: ''' + version + '''
     Welcome to use this tool to create a robot for nodebb.
     It produce by LingkongSky@gmail.com.
+    Project Site: https://github.com/LingkongSky/nodebb-robot.git
     Usage:
         create <name>           create a new task 
         start <name>            start the process by the task name

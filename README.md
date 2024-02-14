@@ -1,7 +1,12 @@
 # English
 ## nodebb-robot
 A topic robot use for nodebb,which can post data by string or url.Support the regular and multitasks.
+
 Environment: Python3.11
+
+## Planning
+Add the function of image post.
+
 ## Build
 ````
 pip install -r requirements.txt
@@ -43,7 +48,12 @@ robots:
 # 简体中文
 ## nodebb-robot
 一个用于Nodebb的论坛机器人，可通过字符串或者链接来指定帖子内容。支持定时和多任务模式。
+
 环境：Python3.11
+
+## 计划
+新增对图片的发送支持
+
 ## 构建
 ````
 pip install -r requirements.txt
