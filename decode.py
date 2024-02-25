@@ -15,7 +15,7 @@ async def inputs(array, name):
         if time_type == 'routine':
             write_process(name)
             while True:
-                await tasks(array)
+                await tasks(array, name)
                 await asyncio.sleep(int(times))
                 log = "execute successful: " + str(datetime.datetime.now())
                 print(log)
@@ -27,7 +27,7 @@ async def inputs(array, name):
             wait_time = calculate_wait_time(times, current_time, 'everyday')
             await asyncio.sleep(wait_time)
             while True:
-                await tasks(array)
+                await tasks(array, name)
                 await asyncio.sleep(86440)
                 log = "execute successful: " + str(datetime.datetime.now())
                 print(log)
@@ -39,7 +39,7 @@ async def inputs(array, name):
             wait_time = calculate_wait_time(times, current_date, 'everymonth')
             await asyncio.sleep(wait_time)
             while True:
-                await tasks(array)
+                await tasks(array, name)
                 await asyncio.sleep(2591920)
                 log = "execute successful: " + str(datetime.datetime.now())
                 print(log)
@@ -50,7 +50,7 @@ async def inputs(array, name):
             current_date = datetime.datetime.now().strftime("%m-%d-%H:%M")
             wait_time = calculate_wait_time(times, current_date, 'once')
             await asyncio.sleep(wait_time)
-            await tasks(array)
+            await tasks(array, name)
             log = "execute successful: " + str(datetime.datetime.now())
             print(log)
             write_log(name, log)
