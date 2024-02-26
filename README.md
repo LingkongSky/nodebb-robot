@@ -10,7 +10,7 @@ Add the function of image post.
 ## Build
 ````
 pip install -r requirements.txt
-pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/site-packages
+pyinstaller ./main.py --onefile
 ````
 ## Usage
 ````
@@ -41,7 +41,7 @@ robots:
       title : "test" # topic title,string or request callback string
       text_content_type: "url" # ["url","string"]
       text_crequest_type: "get" # ['get','post'] if choose the url,the request method
-      text : "http://118.31.18.68:8080/news/api/news-file/get" # topic content,string or request callback string
+      text : "http://www.example.com/get" # topic content,string or request callback string
       time_type: "routine" # ['routine','everyday',''everymonth'','once'] # execute rule
       time: "60" # [seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
 ````
@@ -59,7 +59,7 @@ robots:
 ## 构建
 ````
 pip install -r requirements.txt
-pyinstaller ./main.py --onefile -p /usr/local/python/python3.11/lib/python3.11/site-packages
+pyinstaller ./main.py --onefile
 ````
 ## 使用方法
 ````
@@ -89,7 +89,7 @@ robots:
       title : "test"  # 标题内容，直接输入字符串或者选择url，生成url回调返回的字符串
       text_content_type: "url" # ["url","string"] 正文类型
       text_request_type: "get" # ['get','post'] 如果选择了url，请求的发送方式
-      text : "http://118.31.18.68:8080/news/api/news-file/get" # 正文内容，直接输入字符串或者选择url，生成url回调返回的字符串
+      text : "http://www.example.com/ge" # 正文内容，直接输入字符串或者选择url，生成url回调返回的字符串
       time_type: "routine" # ['routine','everyday',''everymonth'','once'] # 脚本的执行规则
       time: "60" # [seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
 ````

@@ -9,6 +9,6 @@ robots:
       title : "test"
       text_content_type: "string" #["url","string"]
       text_request_type: "get" # ['get','post']
-      text : "http://118.31.18.68:8080/news/api/news-file/get"
+      text : "http://www.example.com/ge"
       time_type: "routine" #['routine','everyday',''everymonth'','once']
       time: "60" #[seconds,"h:m","day-h:m","month-day-h:m"] example: 86400  23:00 07-20:00  12-07-20:00
