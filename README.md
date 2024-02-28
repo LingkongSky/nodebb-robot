@@ -25,7 +25,6 @@ chmod +x nodebb-robot
         stop <name>             stop the process by the task name
         list                    list the tasks
         logs <name>              print the task log
-        help                    print the usage
 ````
 
 ## Config
@@ -74,7 +73,6 @@ chmod +x nodebb-robot
         stop <name>             根据任务名关闭进程
         list                    列出所有任务
         logs <name>              打印任务日志
-        help                    打印使用方法
 ````
 ## 配置文件
 ````

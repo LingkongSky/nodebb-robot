@@ -10,7 +10,7 @@ import traceback
 from decode import inputs
 
 
-version = "1.3.0"
+version = "1.3.1"
 arrays = ["", "", ""]
 d = 0
 for arg in sys.argv:
@@ -27,7 +27,7 @@ async def main():
     utils.file_scanner()  # create the necessary files
     utils.status_update()  # update the tasks.list
     if len(sys.argv) < 2:
-        print("Use help to print the usage")
+        helps()
         sys.exit()
 
     command = sys.argv[1]
@@ -45,7 +45,7 @@ async def main():
         case "logs":
             logs()
         case _:
-            print("Use help to print the usage")
+            helps()
 
 
 async def start():
@@ -167,8 +167,7 @@ def helps():
         start <name>            start the process by the task name
         stop <name>             stop the process by the task name
         list                    list the tasks
-        logs <name>             print the task log
-        help                    print the usage ''')
+        logs <name>             print the task log''')
 
 
 if sys.version_info < (3, 10):
