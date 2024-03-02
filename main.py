@@ -163,11 +163,11 @@ def helps():
     It produce by LingkongSky@gmail.com.
     Project Site: https://github.com/LingkongSky/nodebb-robot.git
     Usage:
-        create <name>           create a new task 
-        start <name>            start the process by the task name
-        stop <name>             stop the process by the task name
+        create <name>           create a new task(default) 
+        start <name>            start the process by the task name(default)
+        stop <name>             stop the process by the task name(default)
         list                    list the tasks
-        logs <name>             print the task log''')
+        logs <name>             print the task log(default)''')
 
 
 if sys.version_info < (3, 10):

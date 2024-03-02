@@ -62,6 +62,7 @@ async def inputs(array, name):
             write_log(name, log)
     except SystemError as e:
         print(e)
+        write_log(name, e)
         traceback.print_exc()
         over()
 
