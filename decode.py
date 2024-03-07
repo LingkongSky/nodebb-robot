@@ -5,6 +5,7 @@ from utils import over
 from utils import write_process
 from utils import write_log
 from task import tasks
+from loguru import logger
 
 
 async def inputs(array, name):
@@ -18,7 +19,7 @@ async def inputs(array, name):
                 await tasks(array, name)
                 await asyncio.sleep(int(times))
                 log = "execute successful: " + str(datetime.datetime.now())
-                print(log)
+                logger.info(log)
                 write_log(name, log)
 
         elif time_type == 'everyday':
@@ -30,7 +31,7 @@ async def inputs(array, name):
                 await tasks(array, name)
                 await asyncio.sleep(86440)
                 log = "execute successful: " + str(datetime.datetime.now())
-                print(log)
+                logger.info(log)
                 write_log(name, log)
 
         elif time_type == 'everymonth':
@@ -42,7 +43,7 @@ async def inputs(array, name):
                 await tasks(array, name)
                 await asyncio.sleep(2591920)
                 log = "execute successful: " + str(datetime.datetime.now())
-                print(log)
+                logger.info(log)
                 write_log(name, log)
 
         elif time_type == 'once':
@@ -52,16 +53,16 @@ async def inputs(array, name):
             await asyncio.sleep(wait_time)
             await tasks(array, name)
             log = "execute successful: " + str(datetime.datetime.now())
-            print(log)
+            logger.info(log)
             write_log(name, log)
             from main import stop
             stop()
         else:
             log = "illegal error:invalid time_type: " + time_type
-            print(log)
+            logger.info(log)
             write_log(name, log)
     except SystemError as e:
-        print(e)
+        logger.error(e)
         write_log(name, e)
         traceback.print_exc()
         over()

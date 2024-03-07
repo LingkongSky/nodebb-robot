@@ -8,9 +8,9 @@ import sys
 import utils
 import traceback
 from decode import inputs
+from loguru import logger
 
-
-version = "1.3.1"
+version = "1.3.2"
 arrays = ["", "", ""]
 d = 0
 for arg in sys.argv:
@@ -62,11 +62,11 @@ async def start():
                     break
 
     except FileNotFoundError:
-        print(f"Task was not found")
+        logger.warning(f"Task was not found")
         traceback.print_exc()
 
     if status == "Enable":
-        print(f"Task is running...")
+        logger.info(f"Task is running...")
         return
 
     try:
@@ -75,7 +75,7 @@ async def start():
             for i in result['robots']:
                 await inputs(i, name)
     except IOError as e:
-        print(e)
+        logger.error(e)
         traceback.print_exc()
 
 
@@ -93,11 +93,11 @@ def stop():
                     break
 
     except FileNotFoundError:
-        print(f"Task was not found:")
+        logger.warning(f"Task was not found:")
         traceback.print_exc()
 
     if status == "Disable":
-        print(f"Task is already stopped...")
+        logger.info(f"Task is already stopped...")
         return
 
     process_file_path = "tasks/" + name + "/process.pid"
@@ -109,7 +109,7 @@ def stop():
                 try:
                     os.kill(int(pid), signal.SIGTERM)
                 except (psutil.NoSuchProcess, ValueError):
-                    print("Not found such process")
+                    logger.warning("Not found such process")
                     traceback.print_exc()
 
 
@@ -125,7 +125,7 @@ def create():
     if os.path.exists(config_file_path):
         shutil.copy(config_file_path, "tasks/" + name)
     else:
-        print("config.yaml isn't exist")
+        logger.warning("config.yaml isn't exist")
 
 
 def lists():

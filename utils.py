@@ -1,6 +1,7 @@
 import os
 import sys
 import psutil
+from loguru import logger
 
 
 def file_scanner():
@@ -69,5 +70,5 @@ def write_log(name, content):
 
 
 def over():
-    print("Uncaught error occurred.")
+    logger.error("Uncaught error occurred.")
     sys.exit()

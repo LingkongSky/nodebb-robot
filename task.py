@@ -1,5 +1,6 @@
 import requests
 from decode import write_log
+from loguru import logger
 
 
 async def tasks(array, name):
@@ -30,14 +31,15 @@ async def tasks(array, name):
 
     response = create(api_url, bearer_token, uid, cid, title, text)
     if response.status_code != 200:
-        print(response.text)
+        logger.warning(response.text)
         write_log(name, response.text)
     else:
-        print("200 OK")
+        logger.info("200 OK")
         write_log(name, "200 OK")
 
+
 def create(url, token, uid, cid, title, content):
-    print("Running tasks...")
+    logger.info("Running tasks...")
     headers = {"Authorization": "Bearer " + token}
     topic = {'uid': uid, 'cid': cid, 'title': title, 'content': content}
     response = requests.post(url, headers=headers, data=topic)
