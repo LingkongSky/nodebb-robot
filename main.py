@@ -128,7 +128,7 @@ def create():
         shutil.copy(config_file_path, "tasks/" + name)
     else:
         logger.warning("config.yaml isn't exist")
-
+        pass
 
 def delete():
     if not os.path.exists("tasks"):
@@ -143,6 +143,7 @@ def delete():
                 os.remove(os.path.join(root, name1))
             for name1 in dirs:
                 os.rmdir(os.path.join(root, name1))
+        os.removedirs("tasks/" + name)
     except OSError as e:
         logger.error(e)
         return
@@ -184,12 +185,12 @@ def helps():
     It produce by LingkongSky@gmail.com.
     Project Site: https://github.com/LingkongSky/nodebb-robot.git
     Usage:
-        create <name>           create a new task(default) 
-        delete <name>           delete the target task(default) 
-        start <name>            start the process by the task name(default)
-        stop <name>             stop the process by the task name(default)
-        list                    list the tasks
-        logs <name>             print the task log(default)''')
+        create     <name>           create a new task(default) 
+        delete     <name>           delete the target task(default) 
+        start      <name>           start the process by the task name(default)
+        stop       <name>           stop the process by the task name(default)
+        logs       <name>           print the task log(default)
+        list                        list the tasks''')
 
 
 if sys.version_info < (3, 10):

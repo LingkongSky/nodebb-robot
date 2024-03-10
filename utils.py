@@ -11,7 +11,6 @@ def file_scanner():
    -
       api_url : "https://www.example.com/api/v3/topics"
       bearer_token : "f35452af-8225-4ab5-b63d-9fcae6266d15"
-      uid : 173
       cid : 2
       title_content_type: "string" # ["url","string"]
       title_request_type: "get" # ['get','post']
@@ -48,8 +47,8 @@ def status_update():
                                 if process.is_running():
                                     result = 1
                             except (psutil.NoSuchProcess, ValueError) as e:
-                                #print(e)
                                 pass
+
                 else:
                     open(process_file_path, "w").close()
                 if result == 1:

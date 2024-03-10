@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0764198-114b-4977-9c61-7fb52a6417f2" name="变更" comment="add some commits in help">
+    <list default="true" id="b0764198-114b-4977-9c61-7fb52a6417f2" name="变更" comment="add the function of the task delete">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nodebb-robot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nodebb-robot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/task.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -246,7 +245,28 @@
       <option name="project" value="LOCAL" />
       <updated>1709394849115</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add some commits in help">
+      <created>1709794909367</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1709794909367</updated>
+    </task>
+    <task id="LOCAL-00026" summary="add some commits in help">
+      <created>1710041425722</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1710041425722</updated>
+    </task>
+    <task id="LOCAL-00027" summary="add the function of the task delete">
+      <created>1710044794434</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1710044794434</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -284,6 +304,7 @@
     <MESSAGE value="update the README.md and config.yaml to delete some outside url" />
     <MESSAGE value="simplify the usage" />
     <MESSAGE value="add some commits in help" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some commits in help" />
+    <MESSAGE value="add the function of the task delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the function of the task delete" />
   </component>
 </project>
