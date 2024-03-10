@@ -21,6 +21,7 @@ chmod +x nodebb-robot
 ````
 ````
         create <name>           create a new task 
+        delete <name>           delete the target task
         start <name>            start the process by the task name
         stop <name>             stop the process by the task name
         list                    list the tasks
@@ -33,7 +34,6 @@ robots:
    -
       api_url : "https://www.example.com/api/v3/topics" #your website
       bearer_token : "f65632af-8115-4ab5-b63d-9fcae6198d15" # the admin page - API user uuid
-      uid : 173 # user id
       cid : 2 # channel id
       title_content_type: "string" # ["url","string"]
       title_request_type: "get" # ['get','post'] if choose the url,the request method
@@ -69,6 +69,7 @@ chmod +x nodebb-robot
 ````
 ````
         create <name>           创建一个新任务
+        delete <name>           删除一个任务
         start <name>            根据任务名创建进程
         stop <name>             根据任务名关闭进程
         list                    列出所有任务
@@ -80,7 +81,6 @@ robots:
    -
       api_url : "https://www.example.com/api/v3/topics" # 你的论坛地址
       bearer_token : "f65632af-8115-4ab5-b63d-9fcae6198d15"# 在管理页面-API访问中生成的用户id
-      uid : 173 # 机器人用户的id
       cid : 2 # 频道类别id
       title_content_type: "url" # ["url","string"] 标题类型
       title_request_type: "get" # ['get','post'] 如果选择了url，请求的发送方式

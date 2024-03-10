@@ -10,7 +10,7 @@ import traceback
 from decode import inputs
 from loguru import logger
 
-version = "1.3.2"
+version = "1.4.0"
 arrays = ["", "", ""]
 d = 0
 for arg in sys.argv:
@@ -38,6 +38,8 @@ async def main():
             stop()
         case "create":
             create()
+        case "delete":
+            delete()
         case "list":
             lists()
         case "help":
@@ -128,6 +130,25 @@ def create():
         logger.warning("config.yaml isn't exist")
 
 
+def delete():
+    if not os.path.exists("tasks"):
+        os.makedirs("tasks")
+
+    if not os.path.exists("tasks/" + name):
+        logger.info("the target Task isn't exist")
+        return
+    try:
+        for root, dirs, files in os.walk("tasks/" + name, topdown=False):
+            for name1 in files:
+                os.remove(os.path.join(root, name1))
+            for name1 in dirs:
+                os.rmdir(os.path.join(root, name1))
+    except OSError as e:
+        logger.error(e)
+        return
+    logger.info("delete finished")
+    lists()
+
 def lists():
     with open("tasks.list", "r") as f:
         lines = f.readlines()
@@ -164,6 +185,7 @@ def helps():
     Project Site: https://github.com/LingkongSky/nodebb-robot.git
     Usage:
         create <name>           create a new task(default) 
+        delete <name>           delete the target task(default) 
         start <name>            start the process by the task name(default)
         stop <name>             stop the process by the task name(default)
         list                    list the tasks
