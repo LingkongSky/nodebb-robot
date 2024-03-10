@@ -6,7 +6,6 @@ from loguru import logger
 async def tasks(array, name):
     api_url = array['api_url']
     bearer_token = array['bearer_token']
-    uid = array['uid']
     cid = array['cid']
     title_content_type = array['title_content_type']
     title_request_type = array['title_request_type']
@@ -29,7 +28,7 @@ async def tasks(array, name):
             result = requests.post(text)
         text = result.text
 
-    response = create(api_url, bearer_token, uid, cid, title, text)
+    response = create(api_url, bearer_token, cid, title, text)
     if response.status_code != 200:
         logger.warning(response.text)
         write_log(name, response.text)
@@ -38,9 +37,9 @@ async def tasks(array, name):
         write_log(name, "200 OK")
 
 
-def create(url, token, uid, cid, title, content):
+def create(url, token, cid, title, content):
     logger.info("Running tasks...")
     headers = {"Authorization": "Bearer " + token}
-    topic = {'uid': uid, 'cid': cid, 'title': title, 'content': content}
+    topic = {'cid': cid, 'title': title, 'content': content}
     response = requests.post(url, headers=headers, data=topic)
     return response
