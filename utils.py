@@ -46,7 +46,7 @@ def status_update():
                                 process = psutil.Process(int(pid))
                                 if process.is_running():
                                     result = 1
-                            except (psutil.NoSuchProcess, ValueError) as e:
+                            except (psutil.NoSuchProcess, ValueError):
                                 pass
 
                 else:

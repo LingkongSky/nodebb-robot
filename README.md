@@ -20,12 +20,12 @@ chmod +x nodebb-robot
 ./nodebb-robot start <name>
 ````
 ````
-        create <name>           create a new task 
-        delete <name>           delete the target task
-        start <name>            start the process by the task name
-        stop <name>             stop the process by the task name
-        list                    list the tasks
-        logs <name>              print the task log
+        create     <name>           create a new task(default) 
+        delete     <name>           delete the target task(default) 
+        start      <name>           start a process by the task name(default)
+        stop       <name>           stop a process by the task name(default)
+        logs       <name>           print the task log(default)
+        list                        list the status of all tasks
 ````
 
 ## Config
@@ -70,10 +70,10 @@ chmod +x nodebb-robot
 ````
         create <name>           创建一个新任务
         delete <name>           删除一个任务
-        start <name>            根据任务名创建进程
-        stop <name>             根据任务名关闭进程
+        start  <name>           根据任务名创建进程
+        stop   <name>           根据任务名关闭进程
+        logs   <name>           打印任务日志
         list                    列出所有任务
-        logs <name>              打印任务日志
 ````
 ## 配置文件
 ````

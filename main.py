@@ -10,7 +10,7 @@ import traceback
 from decode import inputs
 from loguru import logger
 
-version = "1.4.0"
+version = "1.4.1"
 arrays = ["", "", ""]
 d = 0
 for arg in sys.argv:
@@ -130,6 +130,7 @@ def create():
         logger.warning("config.yaml isn't exist")
         pass
 
+
 def delete():
     if not os.path.exists("tasks"):
         os.makedirs("tasks")
@@ -149,6 +150,7 @@ def delete():
         return
     logger.info("delete finished")
     lists()
+
 
 def lists():
     with open("tasks.list", "r") as f:
@@ -187,10 +189,10 @@ def helps():
     Usage:
         create     <name>           create a new task(default) 
         delete     <name>           delete the target task(default) 
-        start      <name>           start the process by the task name(default)
-        stop       <name>           stop the process by the task name(default)
+        start      <name>           start a process by the task name(default)
+        stop       <name>           stop a process by the task name(default)
         logs       <name>           print the task log(default)
-        list                        list the tasks''')
+        list                        list the status of all tasks''')
 
 
 if sys.version_info < (3, 10):
